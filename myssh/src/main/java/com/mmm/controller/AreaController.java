@@ -27,7 +27,7 @@ public class AreaController {
 	@Autowired
 	private AreaService areaService;
 	@Autowired
-	private TaoBaoAreaService TaoBaoAreaService;
+	private TaoBaoAreaService taoBaoAreaService;
 	/**
 	 * 读取xml数据并入库
 	 * @param request
@@ -66,21 +66,21 @@ public class AreaController {
 			String paramIp = ip = ip.substring(0, ip.lastIndexOf("."))+".0";
 			logger.info("只要获取ip的前三段就可以确定所属地信息了，此参数ip为--------> paramIp:"+paramIp);
 			//查看数据库中是否有此ip
-			TaoBaoArea taoBaoArea = this.TaoBaoAreaService.selectTaoBaoAreaByIp(paramIp);
+			TaoBaoArea taoBaoArea = this.taoBaoAreaService.selectTaoBaoAreaByIp(paramIp);
 			if(taoBaoArea!=null){
 				taoBaoAreaData.setCode(0);
 				taoBaoAreaData.setTaoBaoArea(taoBaoArea);
 			}else{
 				//往数据库插入ip相关信息
 				String result = CommonUtils.getAddressByIP(paramIp);
-				if(!"".equals(result.trim())){
+				if(result!=null && !"".equals(result.trim())){
 					result = result.replaceAll("_id", "Id").replace("data", "taoBaoArea");
 					//json转对象
 					taoBaoAreaData = JSON.toJavaObject(JSON.parseObject(result), TaoBaoAreaData.class);
 					taoBaoArea = taoBaoAreaData.getTaoBaoArea();
 					if(taoBaoArea!=null){
 						taoBaoArea.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-						this.TaoBaoAreaService.insertTaoBaoArea(taoBaoArea);
+						this.taoBaoAreaService.insertTaoBaoArea(taoBaoArea);
 					}
 				}else{
 					taoBaoAreaData.setCode(1);
@@ -97,4 +97,47 @@ public class AreaController {
 		return null;
 	}
 	
+	@RequestMapping("/showAreaInfoByIp")
+	public String showAreaInfoByIp2(HttpServletRequest request,HttpServletResponse response){
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = null;
+		TaoBaoAreaData taoBaoAreaData = new TaoBaoAreaData();
+		try {
+			out = response.getWriter();
+			String ip = CommonUtils.getRealIp(request);
+			ip = "101.254.183.41";
+			logger.info("请求地址真实ip是---------------------------------> "+ip);
+			String paramIp = ip = ip.substring(0, ip.lastIndexOf("."))+".0";
+			logger.info("只要获取ip的前三段就可以确定所属地信息了，此参数ip为--------> paramIp:"+paramIp);
+			//查看数据库中是否有此ip
+			TaoBaoArea taoBaoArea = this.taoBaoAreaService.selectTaoBaoAreaByIp2(paramIp);
+			if(taoBaoArea!=null){
+				taoBaoAreaData.setCode(0);
+				taoBaoAreaData.setTaoBaoArea(taoBaoArea);
+			}else{
+				//往数据库插入ip相关信息
+				String result = CommonUtils.getAddressByIP(paramIp);
+				if(result!=null && !"".equals(result.trim())){
+					result = result.replaceAll("_id", "Id").replace("data", "taoBaoArea");
+					//json转对象
+					taoBaoAreaData = JSON.toJavaObject(JSON.parseObject(result), TaoBaoAreaData.class);
+					taoBaoArea = taoBaoAreaData.getTaoBaoArea();
+					if(taoBaoArea!=null){
+						taoBaoArea.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+						this.taoBaoAreaService.insertTaoBaoArea(taoBaoArea);
+					}
+				}else{
+					taoBaoAreaData.setCode(1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(out !=null){
+				out.print(JSON.toJSONString(taoBaoAreaData));
+				out.close();
+			}
+		}
+		return null;
+	}
 }

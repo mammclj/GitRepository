@@ -12,6 +12,7 @@ public interface TaoBaoAreaMapper {
     TaoBaoArea selectByPrimaryKey(String id);
 
     TaoBaoArea selectTaoBaoAreaByIp(String ip);
+    TaoBaoArea selectTaoBaoAreaByIp2(String ip);
 
     int updateByPrimaryKeySelective(TaoBaoArea record);
 

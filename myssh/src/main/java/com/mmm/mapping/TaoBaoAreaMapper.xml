@@ -191,4 +191,12 @@
       isp_id = #{ispId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectTaoBaoAreaByIp2" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tao_bao_area
+    where ip = #{ip,jdbcType=VARCHAR}
+  </select>
+ 
 </mapper>
