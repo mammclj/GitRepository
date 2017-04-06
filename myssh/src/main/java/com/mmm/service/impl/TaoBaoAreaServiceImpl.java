@@ -68,4 +68,43 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 		return this.ipMapper.insert(ip);
 	}
 
+	@Override
+	public IP selectByPrimaryKey(String ip) {
+		return this.ipMapper.selectByPrimaryKey(ip);
+	}
+
+	@Override
+	public int insertTaoBaoAreaAndChildTable(TaoBaoArea taoBaoArea) {
+		this.taoBaoAreaMapper.insert(taoBaoArea);
+		int result = 0;
+		String countryId = taoBaoArea.getCountryId();
+		String cityId = taoBaoArea.getCityId();
+		int ispId = Integer.parseInt(taoBaoArea.getIspId());
+		String ip = taoBaoArea.getIp();
+		Country country = this.countryMapper.selectByPrimaryKey(countryId);
+		if(country==null){
+			country = new Country(countryId,taoBaoArea.getCountry());
+			result = this.countryMapper.insert(country);
+		}
+		City city = this.cityMapper.selectByPrimaryKey(cityId);
+		if(city==null){
+			city = new City(cityId,taoBaoArea.getCity());
+			result = this.cityMapper.insert(city);
+		}
+		
+		SP sp = this.spMapper.selectByPrimaryKey(ispId);
+		if(sp==null){
+			sp = new SP(ispId,taoBaoArea.getIsp());
+			result = this.spMapper.insert(sp);
+		}
+		
+		IP ipModel = this.ipMapper.selectByPrimaryKey(taoBaoArea.getIp());
+		if(ipModel==null){
+			ipModel = new IP(ip,countryId,cityId,ispId);
+			result = this.ipMapper.insert(ipModel);
+		}
+		
+		return result;
+	}
+
 }

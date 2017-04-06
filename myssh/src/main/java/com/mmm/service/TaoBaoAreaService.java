@@ -18,4 +18,7 @@ public interface TaoBaoAreaService {
 	int insertCountry(Country country);
 	int insertIP(IP ip);
 	
+	IP selectByPrimaryKey(String ip);
+	int insertTaoBaoAreaAndChildTable(TaoBaoArea taoBaoArea);
+	
 }

@@ -55,7 +55,7 @@
         <groupId>org.springframework</groupId>  
         <artifactId>spring-test</artifactId>  
         <version>${spring.version}</version>  
-        <scope>test</scope>  
+        <!-- <scope>test</scope>   -->
     </dependency>  
      <dependency>  
          <groupId>org.quartz-scheduler</groupId>  
@@ -131,8 +131,9 @@
         <groupId>junit</groupId>    
         <artifactId>junit</artifactId>    
         <version>4.5</version>    
-        <!-- 表示开发的时候引入，发布的时候不会加载此包 -->    
+        <!-- 表示开发的时候引入，发布的时候不会加载此包 
         <scope>test</scope>    
+        -->    
     </dependency>  
       
     <!-- slf4j -->  

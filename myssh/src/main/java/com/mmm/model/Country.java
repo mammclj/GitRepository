@@ -5,8 +5,6 @@ public class Country {
 
     private String cn;
 
-    private String en;
-
     public String getCountryId() {
         return countryId;
     }
@@ -23,11 +21,21 @@ public class Country {
         this.cn = cn == null ? null : cn.trim();
     }
 
-    public String getEn() {
-        return en;
-    }
+    
+	public Country() {
+		super();
+	}
 
-    public void setEn(String en) {
-        this.en = en == null ? null : en.trim();
-    }
+	public Country(String countryId, String cn) {
+		super();
+		this.countryId = countryId;
+		this.cn = cn;
+	}
+
+	@Override
+	public String toString() {
+		return "Country [countryId=" + countryId + ", cn=" + cn + "]";
+	}
+    
+    
 }

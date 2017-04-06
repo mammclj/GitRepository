@@ -19,7 +19,7 @@ public class FirstScheduledJob extends QuartzJobBean {
 
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
 		//TODO 要实现的代码逻辑
-		logger.info("-----------在这写定时执行代码逻辑----------------");
+//		logger.info("-----------在这写定时执行代码逻辑----------------");
 //		User user = this.userService.getUserById("1");
 	}
 

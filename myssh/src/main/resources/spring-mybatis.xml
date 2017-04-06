@@ -144,7 +144,7 @@
 	<bean id="dataSourceAspect" class="com.mmm.utils.database.DataSourceAspect" />
 	<aop:config>
         <aop:aspect id="dynamicAspect" ref="dataSourceAspect">
-            <aop:pointcut id="dataSourcePointcut" expression="execution(* com.mmm.service.*.*(..))"/>
+            <aop:pointcut id="dataSourcePointcut" expression="execution(* com.mmm.dao.*.*(..))"/>
             <aop:before  pointcut-ref="dataSourcePointcut" method="intercept" />
         </aop:aspect>
     </aop:config>

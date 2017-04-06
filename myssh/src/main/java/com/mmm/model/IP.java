@@ -1,7 +1,7 @@
 package com.mmm.model;
 
 public class IP {
-    private String ip;
+    private String id;
 
     private String countryId;
 
@@ -9,12 +9,12 @@ public class IP {
 
     private Integer isp;
 
-    public String getIp() {
-        return ip;
+    public String getId() {
+        return id;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip == null ? null : ip.trim();
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getCountryId() {
@@ -40,4 +40,25 @@ public class IP {
     public void setIsp(Integer isp) {
         this.isp = isp;
     }
+
+    
+    
+	public IP() {
+		super();
+	}
+
+	public IP(String id, String countryId, String cityId, Integer isp) {
+		super();
+		this.id = id;
+		this.countryId = countryId;
+		this.cityId = cityId;
+		this.isp = isp;
+	}
+
+	@Override
+	public String toString() {
+		return "IP [id=" + id + ", countryId=" + countryId + ", cityId=" + cityId + ", isp=" + isp + "]";
+	}
+    
+    
 }

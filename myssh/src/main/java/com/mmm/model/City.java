@@ -20,4 +20,21 @@ public class City {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
+
+    
+	public City() {
+		super();
+	}
+
+	public City(String cityId, String name) {
+		super();
+		this.cityId = cityId;
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "City [cityId=" + cityId + ", name=" + name + "]";
+	}
+    
 }
