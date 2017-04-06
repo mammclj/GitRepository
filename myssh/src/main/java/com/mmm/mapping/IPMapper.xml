@@ -4,11 +4,12 @@
   <resultMap id="BaseResultMap" type="com.mmm.model.IP" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="country_id" property="countryId" jdbcType="CHAR" />
+    <result column="region_id" property="regionId" jdbcType="CHAR" />
     <result column="city_id" property="cityId" jdbcType="CHAR" />
     <result column="isp" property="isp" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, country_id, city_id, isp
+    id, country_id, region_id, city_id, isp
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -21,9 +22,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.mmm.model.IP" >
-    insert into ip (id, country_id, city_id, 
+    insert into ip (id, country_id, region_id, city_id, 
       isp)
-    values (#{id,jdbcType=VARCHAR}, #{countryId,jdbcType=CHAR}, #{cityId,jdbcType=CHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{countryId,jdbcType=CHAR}, #{regionId,jdbcType=CHAR}, #{cityId,jdbcType=CHAR}, 
       #{isp,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mmm.model.IP" >
@@ -34,6 +35,9 @@
       </if>
       <if test="countryId != null" >
         country_id,
+      </if>
+      <if test="regionId != null" >
+        region_id,
       </if>
       <if test="cityId != null" >
         city_id,
@@ -49,6 +53,9 @@
       <if test="countryId != null" >
         #{countryId,jdbcType=CHAR},
       </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=CHAR},
+      </if>
       <if test="cityId != null" >
         #{cityId,jdbcType=CHAR},
       </if>
@@ -63,6 +70,9 @@
       <if test="countryId != null" >
         country_id = #{countryId,jdbcType=CHAR},
       </if>
+      <if test="regionId != null" >
+        region_id = #{regionId,jdbcType=CHAR},
+      </if>
       <if test="cityId != null" >
         city_id = #{cityId,jdbcType=CHAR},
       </if>
@@ -75,6 +85,7 @@
   <update id="updateByPrimaryKey" parameterType="com.mmm.model.IP" >
     update ip
     set country_id = #{countryId,jdbcType=CHAR},
+    	region_id = #{regionId,jdbcType=CHAR},
       city_id = #{cityId,jdbcType=CHAR},
       isp = #{isp,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}

@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import com.mmm.dao.CityMapper;
 import com.mmm.dao.CountryMapper;
 import com.mmm.dao.IPMapper;
+import com.mmm.dao.RegionMapper;
 import com.mmm.dao.SPMapper;
 import com.mmm.dao.TaoBaoAreaMapper;
 import com.mmm.model.City;
 import com.mmm.model.Country;
 import com.mmm.model.IP;
+import com.mmm.model.Region;
 import com.mmm.model.SP;
 import com.mmm.model.TaoBaoArea;
 import com.mmm.service.TaoBaoAreaService;
@@ -24,6 +26,8 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 	private IPMapper ipMapper;
 	@Autowired
 	private CountryMapper countryMapper;
+	@Autowired
+	private RegionMapper regionMapper;
 	@Autowired
 	private CityMapper cityMapper;
 	@Autowired
@@ -57,6 +61,11 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 	public int insertCity(City city) {
 		return this.cityMapper.insert(city);
 	}
+	
+	@Override
+	public int insertRegion(Region region) {
+		return this.regionMapper.insert(region);
+	}
 
 	@Override
 	public int insertCountry(Country country) {
@@ -78,6 +87,7 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 		this.taoBaoAreaMapper.insert(taoBaoArea);
 		int result = 0;
 		String countryId = taoBaoArea.getCountryId();
+		String regionId = taoBaoArea.getRegionId();
 		String cityId = taoBaoArea.getCityId();
 		int ispId = Integer.parseInt(taoBaoArea.getIspId());
 		String ip = taoBaoArea.getIp();
@@ -85,6 +95,12 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 		if(country==null){
 			country = new Country(countryId,taoBaoArea.getCountry());
 			result = this.countryMapper.insert(country);
+		}
+		
+		Region region = this.regionMapper.selectByPrimaryKey(regionId);
+		if(region==null){
+			region = new Region(regionId,taoBaoArea.getRegion());
+			result = this.regionMapper.insert(region);
 		}
 		City city = this.cityMapper.selectByPrimaryKey(cityId);
 		if(city==null){
@@ -100,7 +116,7 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 		
 		IP ipModel = this.ipMapper.selectByPrimaryKey(taoBaoArea.getIp());
 		if(ipModel==null){
-			ipModel = new IP(ip,countryId,cityId,ispId);
+			ipModel = new IP(ip,countryId,regionId,cityId,ispId);
 			result = this.ipMapper.insert(ipModel);
 		}
 		

@@ -5,6 +5,8 @@ public class IP {
 
     private String countryId;
 
+    private String regionId;
+    
     private String cityId;
 
     private Integer isp;
@@ -47,18 +49,30 @@ public class IP {
 		super();
 	}
 
-	public IP(String id, String countryId, String cityId, Integer isp) {
+	public String getRegionId() {
+		return regionId;
+	}
+
+	public void setRegionId(String regionId) {
+		this.regionId = regionId;
+	}
+
+	public IP(String id, String countryId, String regionId, String cityId, Integer isp) {
 		super();
 		this.id = id;
 		this.countryId = countryId;
+		this.regionId = regionId;
 		this.cityId = cityId;
 		this.isp = isp;
 	}
 
 	@Override
 	public String toString() {
-		return "IP [id=" + id + ", countryId=" + countryId + ", cityId=" + cityId + ", isp=" + isp + "]";
+		return "IP [id=" + id + ", countryId=" + countryId + ", regionId=" + regionId + ", cityId=" + cityId + ", isp="
+				+ isp + "]";
 	}
+
+	
     
     
 }

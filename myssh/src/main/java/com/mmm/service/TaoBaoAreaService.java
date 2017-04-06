@@ -3,6 +3,7 @@ package com.mmm.service;
 import com.mmm.model.City;
 import com.mmm.model.Country;
 import com.mmm.model.IP;
+import com.mmm.model.Region;
 import com.mmm.model.SP;
 import com.mmm.model.TaoBaoArea;
 
@@ -15,6 +16,7 @@ public interface TaoBaoAreaService {
 	//sp表
 	int insertSP(SP sp);
 	int insertCity(City city);
+	int insertRegion(Region region);
 	int insertCountry(Country country);
 	int insertIP(IP ip);
 	
