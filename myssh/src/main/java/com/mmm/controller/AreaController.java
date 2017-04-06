@@ -97,7 +97,7 @@ public class AreaController {
 		return null;
 	}
 	
-	@RequestMapping("/showAreaInfoByIp")
+	@RequestMapping("/showAreaInfoByIp2")
 	public String showAreaInfoByIp2(HttpServletRequest request,HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = null;
