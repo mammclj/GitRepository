@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectByPrimaryKey(id);
 	}
 	
-	@DataSource("dataSource2")
 	public List<User> getAll() {
 		logger.info("DataSource----> "+DynamicDataSourceHolder.getDataSource());
 		return userMapper.getAll();
