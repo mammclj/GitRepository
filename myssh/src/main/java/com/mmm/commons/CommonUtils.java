@@ -41,8 +41,26 @@ public class CommonUtils {
 	
 	/**
 	 * 调用淘宝ip地址库远程接口，获取指定ip的地域信息
-	 * @param strIP
-	 * @return
+	 * @param strIP IP地址
+	 * @return json字符串，如：
+		{
+		    "code": 0,
+		    "data": {
+		        "ip": "210.75.225.254",
+		        "country": "中国",
+		        "area": "华北",
+		        "region": "北京市",
+		        "city": "北京市",
+		        "county": "",
+		        "isp": "电信",
+		        "country_id": "86",
+		        "area_id": "100000",
+		        "region_id": "110000",
+		        "city_id": "110000",
+		        "county_id": "-1",
+		        "isp_id": "100017"
+		    }
+		}
 	 */
 	public static String getAddressByIP(String strIP) {
 		Long startTime = System.currentTimeMillis();

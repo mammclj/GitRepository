@@ -2,16 +2,6 @@ package com.mmm.dao;
 
 import com.mmm.model.City;
 
-public interface CityMapper {
-    int deleteByPrimaryKey(String cityId);
+public interface CityMapper extends BaseMapper<City>{
 
-    int insert(City record);
-
-    int insertSelective(City record);
-
-    City selectByPrimaryKey(String cityId);
-
-    int updateByPrimaryKeySelective(City record);
-
-    int updateByPrimaryKey(City record);
 }

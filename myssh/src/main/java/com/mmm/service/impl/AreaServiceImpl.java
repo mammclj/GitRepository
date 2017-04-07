@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ public class AreaServiceImpl implements AreaService {
 	@Override
 	public void insertBenchData(List<Area> list) {
 		this.areaMapper.insertBenchData(list);
-		
 	}
 
 	@Override
@@ -34,7 +32,6 @@ public class AreaServiceImpl implements AreaService {
 		Document doc = read.read(new File(path));
 		List<Area> list = this.getAreaMap(doc.getRootElement(), "", new ArrayList<Area>());
 		this.areaMapper.insertBenchData(list);
-		
 	}
 	public List<Area> getAreaMap(Element element,String parentId,List<Area> list){
 		String type = element.getName();

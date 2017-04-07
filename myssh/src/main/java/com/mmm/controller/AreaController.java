@@ -122,7 +122,7 @@ public class AreaController {
 			//查看数据库中是否有此ip
 			IP ipModel = this.taoBaoAreaService.selectByPrimaryKey(ip);
 			if(ipModel!=null){
-				map.put("countryId", ipModel.getCountryId());
+				map.put("regionId", ipModel.getRegionId());
 				map.put("cityId", ipModel.getCityId());
 				message = "查询成功！";
 			}else{
@@ -136,7 +136,7 @@ public class AreaController {
 						if(taoBaoArea!=null){
 							taoBaoArea.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 							if(this.taoBaoAreaService.insertTaoBaoAreaAndChildTable(taoBaoArea)==1){
-								map.put("countryId", taoBaoArea.getCountryId());
+								map.put("regionId", taoBaoArea.getRegionId());
 								map.put("cityId", taoBaoArea.getCityId());
 								message = "查询成功！";
 							}
@@ -149,6 +149,9 @@ public class AreaController {
 			e.printStackTrace();
 		}finally{
 			if(out !=null){
+				json.setSuccess(success);
+				json.setObj(map);
+				json.setMessage(message);
 				out.print(JSON.toJSONString(json));
 				out.close();
 			}
