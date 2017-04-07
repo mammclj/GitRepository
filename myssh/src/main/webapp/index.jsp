@@ -9,6 +9,22 @@
 	function showCenter(url){
 		$('#centerIframe').attr('src',url);
 	}
+	$(function(){
+		$('ul').css('width',$('#parentDiv').css('width'));
+		$('#menuUl').tree({
+			data: [
+				{text: 'Test showAreaInfoByIp2',attributes:{url:'${path}/areaController/showAreaInfoByIp2'}},
+				{text: 'Test showAreaInfoByIp',attributes:{url:'${path}/areaController/showAreaInfoByIp'}},
+				{text: 'Test readAreaXmlFile',attributes:{url:'${path}/areaController/readAreaXmlFile'}},
+				{text: 'Test saveUser',attributes:{url:'${path}/userController/963/saveUser'}},
+				{text: 'Test getAll',attributes:{url:'${path}/userController/getAll'}},
+				{text: 'Test showUser',attributes:{url:'${path}/userController/1/showUser'}}
+			],
+			onClick: function(node){
+				showCenter(node.attributes.url);
+			}
+		});		
+	});
 </script>
 <style type="text/css">
 	table tr{
@@ -28,15 +44,7 @@
 				data-options="title:'功能导航',border:false,fit:true">
 				<div class="easyui-accordion" data-options="fit:true,border:false">
 					<div title="系统菜单" data-options="iconCls:'icon-save'">
-						<table>
-							<tr><td><a href="javascript:void(0);" onclick="showCenter('${path}/areaController/showAreaInfoByIp2');">Test showAreaInfoByIp2</a></td></tr>
-							<tr><td><a href="javascript:void(0);" onclick="showCenter('${path}/areaController/showAreaInfoByIp');">Test showAreaInfoByIp</a></td></tr>
-							<tr><td><a href="javascript:void(0);" onclick="showCenter('${path}/areaController/readAreaXmlFile');">Test readAreaXmlFile</a></td></tr>
-							<tr><td><a href="javascript:void(0);" onclick="showCenter('${path}/userController/963/saveUser');">Test saveUser</a></td></tr>
-							<tr><td><a href="javascript:void(0);" onclick="showCenter('${path}/userController/getAll');">Test getAll</a></td></tr>
-							<tr><td><a href="javascript:void(0);" onclick="showCenter('${path}/userController/1/showUser');">Test showUser</a></td></tr>
-						</table>
-					
+						<ul id="menuUl"></ul>
 					</div>
 				</div>
 			</div>
