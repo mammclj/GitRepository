@@ -115,7 +115,7 @@ public class AreaController {
 		try {
 			out = response.getWriter();
 			String ip = CommonUtils.getRealIp(request);
-//			ip = "101.254.183.41";
+//			ip = "101.254.183.41"; 
 			logger.info("请求地址真实ip是---------------------------------> "+ip);
 //			ip = ip.substring(0, ip.lastIndexOf("."))+".0";
 //			logger.info("只要获取ip的前三段就可以确定所属地信息了，此参数ip为--------> ip:"+ip);
