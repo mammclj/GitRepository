@@ -3,6 +3,7 @@ package com.msy.module.common.service.impl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.msy.module.common.dao.CityMapper;
@@ -92,8 +93,8 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 	}
 
 	@Override
-	@Transactional
 	@DataSource("dataSource1")
+	@Transactional(propagation = Propagation.REQUIRED)
 	public int insertTaoBaoAreaAndChildTable(TaoBaoArea taoBaoArea) {
 		this.taoBaoAreaMapper.insert(taoBaoArea);
 		int result = 0;
@@ -125,9 +126,9 @@ public class TaoBaoAreaServiceImpl implements TaoBaoAreaService {
 			sp = new SP(ispId,taoBaoArea.getIsp());
 			result = this.spMapper.insert(sp);
 		}
-		logger.info(1/0);
 		IP ipModel = this.ipMapper.selectByPrimaryKey(taoBaoArea.getIp());
 		if(ipModel==null){
+			countryId = "4444444444444444444444";
 			ipModel = new IP(ip,countryId,regionId,cityId,ispId);
 			result = this.ipMapper.insert(ipModel);
 		}
